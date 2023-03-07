@@ -1,8 +1,20 @@
 import { createApp } from '../plugins/js/vue.esm-browser.js';
+import { createRouter, createWebHistory, createWebHashHistory }  from '../plugins/js/vue-router.esm-browser.js';
 import { createVuetify } from '../plugins/js/vuetify-labs.esm.min.js';
 import Custom from '../components/Custom.js';
+import Home from '../views/Home.js';
+import About from '../views/About.js';
 
+//const { createRouter, createWebHistory, createWebHashHistory } = VueRouter
 const vuetify = createVuetify();
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/', component: Home },
+    { path: '/about', component: About },
+  ],
+})
 
 const app = createApp({
   data() {
@@ -10,21 +22,7 @@ const app = createApp({
       message: 'Hello Vue!',
       count: 10,
       theme: 'light',
-      text: 'Text',
-      items: [
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-        },
-        {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-        },
-      ],
+      text: 'Textsss',
     }
   },
   provide() {
@@ -46,4 +44,4 @@ const app = createApp({
   }
 });
 
-app.use(vuetify).mount('#app')
+app.use(vuetify).use(router).mount('#app')
