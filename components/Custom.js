@@ -1,11 +1,19 @@
 export default {
+  emits: ['maincountup'],
+  props: ['maincount'],
   data() {
-    return { count: 0 }
+    return {
+      mainCountw: this.mainCount,
+      count: 1
+    }
   },
   methods: {
     plus() {
       this.count++
-    }
+    },
+
   },
-  template: `<div @click="plus">count is {{ count }}</div>`
+  template: `<div @click="plus">Localcount is {{ count }}</div>
+  <div @click="$emit('maincountup')">Maincount is {{ maincount }}</div>
+  `
 }

@@ -8,6 +8,7 @@ const app = createApp({
   data() {
     return {
       message: 'Hello Vue!',
+      count: 10,
       theme: 'light',
       text: 'Text',
       items: [
@@ -26,10 +27,19 @@ const app = createApp({
       ],
     }
   },
-    methods: {
+  provide() {
+    return {
+      mainCount: this.count
+    }
+  },
+  methods: {
     onClick() {
       this.theme = this.theme === "light" ? "dark" : "light";
     },
+    mainCountUp() {
+      this.count++
+      console.log(this.count);
+    }
   },
   components: {
     Custom

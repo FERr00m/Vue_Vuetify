@@ -27,7 +27,10 @@
       <v-container>
         {{ message }}
 
-      <Custom></Custom>
+      <Custom
+        :maincount="count"
+        @maincountup="mainCountUp">
+      </Custom>
       <v-card
 
         title="Card title"
