@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preload" href="fonts/materialdesignicons-webfont.woff2" as="font" crossorigin="">
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="plugins/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="plugins/css/vuetify.min.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <script src="js/main.js" type="module"></script>
 
@@ -15,45 +17,51 @@
 </head>
 
 <body id="app">
-   <v-app :theme="theme">
+  <transition name="fade">
+    <div v-show="!isMounted" class="loader-wrap" :class="themeObject">
+      <div class="lds-roller main-loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </transition>
+
+  <v-app :theme="theme" v-cloak>
     <v-app-bar>
       <v-spacer></v-spacer>
 
-      <router-link
-        custom
-        to="/"
-        v-slot="{ href, route, navigate, isActive, isExactActive }"
-      >
-        <v-btn
-        @click="navigate">
+      <router-link custom to="./" v-slot="{ href, route, navigate, isActive, isExactActive }">
+        <v-btn class="my-class" prepend-icon="mdi-star" :color="isActive ? 'secondary' : ''" @click=" navigate">
 
           Home
         </v-btn>
       </router-link>
-      <router-link
-        custom
-        to="/about"
-        v-slot="{ href, route, navigate, isActive, isExactActive }"
-      >
-        <v-btn
-        @click="navigate">
+      <router-link custom to="./about" v-slot="{ href, route, navigate, isActive, isExactActive }">
+        <v-btn :color="isActive ? 'secondary' : ''" @click="navigate">
 
           About
         </v-btn>
       </router-link>
 
 
-      <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">Toggle Theme
+      <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="changeTheme">Toggle
+        Theme
       </v-btn>
     </v-app-bar>
 
     <v-main>
       <v-container>
-        {{ message }}
+        <h1>
+          {{ message }}
+        </h1>
 
-        <Custom
-          :maincount="count"
-          @maincountup="mainCountUp">
+        <Custom :maincount="count" @maincountup="mainCountUp">
         </Custom>
 
         <router-view :text="text"></router-view>
@@ -61,9 +69,9 @@
 
     </v-main>
 
+
+
   </v-app>
-
-
 </body>
 
 </html>

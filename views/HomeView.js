@@ -16,7 +16,7 @@ export default {
           src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
         },
       ],
-    }
+    };
   },
   template: `
   <v-card
@@ -36,5 +36,5 @@ export default {
       cover
     ></v-carousel-item>
   </v-carousel>
-  `
-}
+  `,
+};

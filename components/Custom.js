@@ -3,17 +3,18 @@ export default {
   props: ['maincount'],
   data() {
     return {
-      mainCountw: this.mainCount,
-      count: 1
-    }
+      count: 1,
+    };
   },
   methods: {
-    plus() {
-      this.count++
+    plus(e) {
+      this.count++;
+      console.log(this.$store.state.tasks);
+      console.log(this.$store.getters.tasksLength);
+      console.log(this.$store.getters.tasksActiveLength);
     },
-
   },
-  template: `<div @click="plus">Localcount is {{ count }}</div>
-  <div @click="$emit('maincountup')">Maincount is {{ maincount }}</div>
-  `
-}
+  template: `<v-btn @click="plus">Localcount is {{ count }}</v-btn>
+  <v-btn @click="$emit('maincountup')">Maincount is {{ maincount }}</v-btn>
+  `,
+};
